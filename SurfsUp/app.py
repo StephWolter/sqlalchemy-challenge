@@ -55,29 +55,24 @@ def precipitation():
     prior_year = most_recent - dt.timedelta(days=366);
     prcp_results = session.query(Measurement.date,Measurement.prcp).filter.strftime(Measurement.date >= prior_year).\
     order_by(Measurement.date).all()
+    prcp_dict = dict(prcp_results
+    return jsonify(prcp_dict)
 
-    year_prcp_data = []
-    for date, precipitation in prcp_results:
-        prcp_dict = {}
-        prcp_dict["date"] = date
-        prcp_dict["prcp"] = prcp
-        year_prcp_data.append(prcp_results)
+@app.route("/api/v1.0/stations")
+def stations():
+    # Query list of stations
+    active_stations = session.query(Measurement.station).distinct().all()
 
-    return jsonify(precipitation)
-
-
-# @app.route("/api/v1.0/stations")
-# def stations():
-#     # Query list of stations
-#     active_stations = session.query(Measurement.station).distinct().all()
-
-#     return jsonify(stations)
+    return jsonify(stations)
 
 
-# @app.route("/api/v1.0/tobs")
-# def tobs():
-
-#     return jsonify(tobs)
+@app.route("/api/v1.0/tobs")
+def tobs():
+    prior_year = most_recent - dt.timedelta(days=366);
+    most_active = session.query(*counts).order_by(func.count(Measurement.station).desc()).group_by(Measurement.station).first()[0]
+    busybusy = session.query(Measurement.tobs).filter(Measurement.station == 'USC00519281').filter(Measurement.date >= prior_year).all()
+    busybusyList = list(busybusy)
+    return jsonify(busybusyList)
 
 
 if __name__ == '__main__':

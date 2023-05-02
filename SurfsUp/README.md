@@ -17,7 +17,8 @@
             * app.py                        # main code for the second half of the challenge
             * README.md
 
-* Examined the brief given on the bootcampspot module challenge #10 page, checked csv files in Visual Studio Code and Pandas.
+* Examined the brief given on the bootcampspot module challenge #10 page, checked csv files in Visual Studio Code and Pandas. 
+* Pushed regularly to git repository.
 
 
 ## DataGathering
@@ -64,7 +65,9 @@
         * Plotted that information as a histogram of the temperature and frequency of that temperature.
     * Closed the session.
 
-## DataGathering
+## FLASK
+    * Import all necessasry tools and libraries.
+    * 
 
 
 
